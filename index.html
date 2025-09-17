@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex">
+    <script>
+      (function(){
+        // get search params (without leading '?')
+        var params = window.location.search || '';
+        if (params.startsWith('?')) params = params.substring(1);
+
+        // predefined message (URL-encoded)
+        var text = encodeURIComponent('Hi, I am interested');
+
+        // build wa.me link: include &params if present
+        var waLink = 'https://wa.me/917989613271?text=' + text + (params ? '&' + params : '');
+
+        // try to redirect the top window (break out of iframe). fallback to same window.
+        try {
+          window.top.location.href = waLink;
+        } catch (e) {
+          window.location.href = waLink;
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    Redirecting you to WhatsApp…<br>
+    If nothing happens, <a id="manual">click here</a>.
+    <script>
+      // set manual link in case JS can't change top.location
+      (function(){
+        var params = window.location.search || '';
+        if (params.startsWith('?')) params = params.substring(1);
+        var text = encodeURIComponent('Hi, I am interested in you furnitures');
+        document.getElementById('manual').href = 'https://wa.me/917989613271?text=' + text + (params ? '&' + params : '');
+      })();
+    </script>
+  </body>
+</html>
